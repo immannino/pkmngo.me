@@ -1,0 +1,125 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Trainer Card Buddy">
+    <meta property="og:site_name" content="pogo">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://pogo.spaghet.me">
+    <meta name="twitter:site" content="https://pogo.spaghet.me">
+    <meta data-hid="title" name="title" content="Trainer Card Buddy">
+    <meta data-hid="description" name="description" content="Create and Share your Pokemon Go trainer card online!">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Trainer Card Buddy">
+    <meta property="og:description" content="Create and Share your Pokemon Go trainer card online!">
+    <meta property="og:image" content="https://pogo.spaghet.me/404.svg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Trainer Card Buddy">
+    <meta name="twitter:description" content="Create and Share your Pokemon Go trainer card online!">
+    <meta name="twitter:image" content="https://pogo.spaghet.me/404.svg">
+    <meta name="twitter:image:alt" content="Pokemon Hatch Egg image">
+    <title>Trainer Card Builder</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Trainer Card Buddy
+      </h1>
+    </header>
+
+    <main>
+      <p>Create and Share your Pokemon Go trainer card online!</p>
+      
+      <h4>Features</h4>
+
+      <blockquote>
+        <ul>
+          <li>Customize to match your team</li>
+          <li>Share it with your friends</li>
+          <li>Post on Social Media</li>
+        </ul> 
+      </blockquote>
+      
+
+    <div id="app" @submit.prevent="createImage">
+      <form name="form" onsubmit="javascript:void(0);">
+        <label for="name">Trainer Name</label>
+        <input v-model="name" id="name" required name="name" aria-label="Pokemon go Trainer name" type="text" maxlength="100" placeholder="GoodBarn">
+
+        <label for="code">Trainer Code</label>
+        <input v-model="code" id="code" required name="code" aria-label="Pokemon go Trainer code" type="text" maxlength="12" placeholder="1234 5678 9012">
+        <div class="error" v-if="notification">{{notification}}</div>
+
+        <label for="radio-group">Select Card Style</label>
+        <div class="radio-group">
+          <input type="radio" name="style" value="default" id="default" checked v-model="style">
+          <label for="default">Default</label>
+
+          <input type="radio" name="style" value="mystic" id="mystic" v-model="style">
+          <label class="mystic" for="mystic">Mystic</label>
+
+          <input type="radio" name="style" value="instinct" id="instinct" v-model="style">
+          <label class="instinct" for="instinct">Instinct</label>
+
+          <input type="radio" name="style" value="valor" id="valor" v-model="style">
+          <label class="valor" for="valor">Valor</label>
+        </div>
+
+        <button id="submit" class="pogo-button center">Create!</button>
+      </form>
+    </div>
+    </main>
+
+    <footer>
+      <hr>
+      Made with love by <a href="https://spaghet.me" target="_blank">Tony</a> on <a href="https://glitch.com" target="_blank">Glitch</a>!
+    </footer>
+
+    <script>
+      new Vue({
+            el: '#app',
+            data: {
+                notification: null,
+                name: null,
+                code: null,
+                style: 'default'
+            },
+            mounted() {
+
+            },
+            methods: {
+              createImage() {
+                this.notification = null;
+
+                if (this.code.length < 12) {
+                  this.notification = 'Please enter your 12 digit Player Code!';
+                }
+
+                const styleText = this.style === 'mystic' ? 'mystic' :
+                            this.style === 'instinct' ? 'instinct' :
+                            this.style === 'valor' ? 'valor' : '';
+
+                const style = styleText.length ? `?style=${styleText}` : '';
+                  
+                window.open(`/${this.name}/${this.code}/${style}`, '_blank');
+              }
+            }
+      })
+    </script>
+    <style>
+
+      .error { font-size: 12px; color: red;}
+      .mystic { color: blue; }
+      .valor { color: red; }
+      .instinct { color: yellow; background: black; }
+    </style>
+  </body>
+</html>
