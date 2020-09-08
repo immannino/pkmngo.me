@@ -47,23 +47,23 @@ app.get('/:name/:code', async (req, res) => {
 });
 
 
-app.get('/:name/:code/card.png', async (req, res) => {
-  const { name, code } = req.params;
+// app.get('/:name/:code/card.png', async (req, res) => {
+//   const { name, code } = req.params;
   
-  const style = req.query['style'];
+//   const style = req.query['style'];
 
-  if (!name || !code || code.length !== 14 ) {
-    res.set({
-      'content-type': 'image/svg+xml',
-      'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
-    });
+//   if (!name || !code || code.length !== 14 ) {
+//     res.set({
+//       'content-type': 'image/svg+xml',
+//       'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
+//     });
 
-    return fs.createReadStream(`${__dirname}/404.svg`).pipe(res);
-  }
+//     return fs.createReadStream(`${__dirname}/404.svg`).pipe(res);
+//   }
 
   
-  return await createPogoImagePng(res, name, code, style);
-});
+//   return await createPogoImagePng(res, name, code, style);
+// });
 
 // listen for requests :)
 var listener = app.listen(port, () => {
