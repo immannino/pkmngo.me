@@ -39,7 +39,7 @@ app.get('/:name/:code', async (req, res) => {
       'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
     });
 
-    return fs.createReadStream('./public/404.svg').pipe(res);
+    return fs.createReadStream(`${__dirname}/404.svg`).pipe(res);
   }
 
   
