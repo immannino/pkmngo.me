@@ -6,7 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
-const { createPogoImage } = require('./pogo');
+const { createPogoImage, createPogoImagePng } = require('./pogo');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -47,7 +47,7 @@ app.get('/:name/:code', async (req, res) => {
 });
 
 
-app.get('/:name/:code/card.svg', async (req, res) => {
+app.get('/:name/:code/card.png', async (req, res) => {
   const { name, code } = req.params;
   
   const style = req.query['style'];
@@ -62,7 +62,7 @@ app.get('/:name/:code/card.svg', async (req, res) => {
   }
 
   
-  return await createPogoImage(res, name, code, style);
+  return await createPogoImagePng(res, name, code, style);
 });
 
 // listen for requests :)
