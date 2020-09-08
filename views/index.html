@@ -26,7 +26,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
     <link rel="stylesheet" href="/style.css">
-    <script src="https://unpkg.com/vue"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
   </head>
   <body>
     <header>
@@ -55,7 +57,7 @@
         <input v-model="name" id="name" required name="name" aria-label="Pokemon go Trainer name" type="text" maxlength="100" placeholder="GoodBarn">
 
         <label for="code">Trainer Code</label>
-        <input v-model="code" id="code" required name="code" aria-label="Pokemon go Trainer code" type="text" maxlength="12" placeholder="1234 5678 9012">
+        <input v-model="code" id="code" v-mask="'XXXX XXXX XXXX'" required name="code" aria-label="Pokemon go Trainer code" type="text" minlength="14" maxlength="14" placeholder="1234 5678 9012">
         <div class="error" v-if="notification">{{notification}}</div>
 
         <label for="radio-group">Select Card Style</label>
@@ -84,6 +86,8 @@
     </footer>
 
     <script>
+      Vue.directive('mask', VueMask.VueMaskDirective);
+
       new Vue({
             el: '#app',
             data: {
@@ -99,17 +103,19 @@
               createImage() {
                 this.notification = null;
 
-                if (this.code.length < 12) {
+                if (this.code.length < 14) {
                   return this.notification = 'Please enter your 12 digit Player Code!';
                 }
+
+                const formattedCode = this.code.split(' ').join('-');
 
                 const styleText = this.style === 'mystic' ? 'mystic' :
                             this.style === 'instinct' ? 'instinct' :
                             this.style === 'valor' ? 'valor' : '';
 
                 const style = styleText.length ? `?style=${styleText}` : '';
-                  
-                window.open(`/${this.name}/${this.code}/${style}`, '_blank');
+                
+                window.open(`/${this.name}/${formattedCode}/${style}`, '_blank');
               }
             }
       })

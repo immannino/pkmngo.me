@@ -3,7 +3,7 @@ const { base, valor, instinct, mystic } = require('./templates');
 
 async function createPogoImage(res, name, code, style) {
     const qrCode = await QRCode.toDataURL(code);
-    const formattedCode = format(String(code));
+    const formattedCode = code.split('-').join(' ');
 
     switch (style) {
         case 'mystic':

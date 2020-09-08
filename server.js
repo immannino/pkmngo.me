@@ -33,7 +33,7 @@ app.get('/:name/:code', async (req, res) => {
   
   const style = req.query['style'];
 
-  if (!name || !code || code.length !== 12 ) {
+  if (!name || !code || code.length !== 14 ) {
     res.set({
       'content-type': 'image/svg+xml',
       'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
