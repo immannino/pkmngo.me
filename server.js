@@ -47,6 +47,24 @@ app.get('/:name/:code', async (req, res) => {
 });
 
 
+app.get('/:name/:code/card.svg', async (req, res) => {
+  const { name, code } = req.params;
+  
+  const style = req.query['style'];
+
+  if (!name || !code || code.length !== 14 ) {
+    res.set({
+      'content-type': 'image/svg+xml',
+      'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
+    });
+
+    return fs.createReadStream(`${__dirname}/404.svg`).pipe(res);
+  }
+
+  
+  return await createPogoImage(res, name, code, style);
+});
+
 // listen for requests :)
 var listener = app.listen(port, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
