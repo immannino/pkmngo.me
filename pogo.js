@@ -1,4 +1,5 @@
 const QRCode = require('qrcode');
+const sharp = require('sharp');
 const { base, valor, instinct, mystic } = require('./templates');
 
 async function createPogoImage(res, name, code, style) {
@@ -30,44 +31,39 @@ async function createPogoImage(res, name, code, style) {
     return res.end(image, 'binary');
 }
 
-// async function createPogoImagePng(res, name, code, style) {
-//     const qrCode = await QRCode.toDataURL(code);
-//     const formattedCode = code.split('-').join(' ');
+async function createPogoImagePng(res, name, code, style) {
+    const qrCode = await QRCode.toDataURL(code);
+    const formattedCode = code.split('-').join(' ');
     
-//     let image;
+    let image;
   
-//     switch (style) {
-//         case 'mystic':
-//             image = mystic(name, formattedCode, qrCode);
-//             break;
-//         case 'instinct':
-//             image = instinct(name, formattedCode, qrCode);
-//             break;
-//         case 'valor':
-//             image = valor(name, formattedCode, qrCode);
-//             break;
-//         default:
-//             image = base(name, formattedCode, qrCode);
-//             break;
-//     }
-    
-//     const pngImage = await convert(image);
+    switch (style) {
+        case 'mystic':
+            image = mystic(name, formattedCode, qrCode);
+            break;
+        case 'instinct':
+            image = instinct(name, formattedCode, qrCode);
+            break;
+        case 'valor':
+            image = valor(name, formattedCode, qrCode);
+            break;
+        default:
+            image = base(name, formattedCode, qrCode);
+            break;
+    }
 
-//       res.set({
-//           'content-type': 'image/png',
-//           'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
-//       });
+    let pngImage = await sharp(Buffer.from(image)).png().toBuffer()
 
-//       res.writeHead(200);
-//       return res.end(pngImage, 'binary');
-// };
+    res.set({
+        'content-type': 'image/png',
+        'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
+    });
 
-
-function format(s) {
-    return s.toString().replace(/\d{4}(?=.)/g, '$& ');
-}
+    res.writeHead(200);
+    return res.end(pngImage, 'binary');
+};
 
 module.exports = {
     createPogoImage,
-    // createPogoImagePng
+    createPogoImagePng
 }
