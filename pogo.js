@@ -1,25 +1,16 @@
 const QRCode = require('qrcode');
 const sharp = require('sharp');
-const { base, valor, instinct, mystic } = require('./templates');
+const template = require('./templates');
 
 async function createPogoImage(res, name, code, style) {
     const qrCode = await QRCode.toDataURL(code);
     const formattedCode = code.split('-').join(' ');
     let image;
   
-    switch (style) {
-        case 'mystic':
-            image = mystic(name, formattedCode, qrCode);
-            break;
-        case 'instinct':
-            image = instinct(name, formattedCode, qrCode);
-            break;
-        case 'valor':
-            image = valor(name, formattedCode, qrCode);
-            break;
-        default:
-            image = base(name, formattedCode, qrCode);
-            break;
+    if (template[style]) {
+        image = template[style](name, formattedCode, qrCode);
+    } else {
+        image = template.base(name, formattedCode, qrCode);
     }
 
     res.set({
@@ -37,19 +28,10 @@ async function createPogoImagePng(res, name, code, style) {
     
     let image;
   
-    switch (style) {
-        case 'mystic':
-            image = mystic(name, formattedCode, qrCode);
-            break;
-        case 'instinct':
-            image = instinct(name, formattedCode, qrCode);
-            break;
-        case 'valor':
-            image = valor(name, formattedCode, qrCode);
-            break;
-        default:
-            image = base(name, formattedCode, qrCode);
-            break;
+    if (template[style]) {
+        image = template[style](name, formattedCode, qrCode);
+    } else {
+        image = template.base(name, formattedCode, qrCode);
     }
 
     let pngImage = await sharp(Buffer.from(image)).png().toBuffer()

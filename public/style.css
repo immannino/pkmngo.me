@@ -49,9 +49,9 @@
   --background: var(--instinct-yellow, #FFDE00)
 }
 * {
-/* Reset margins and padding */
-margin: 0;
-padding: 0;
+  /* Reset margins and padding */
+  margin: 0;
+  padding: 0;
 }
 
 /* body > * + * {
@@ -80,11 +80,23 @@ body {
 }
 
 header {
-  background: var(--btn-icon-border);
+  background: white;
+  color: var(--btn-icon-border);
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid salmon;
+}
+
+header img {
+  height: 65px;
+  width: 65px;
+  margin: 0;
 }
 
 header h1 {
-  color: var(--btn-icon-bg);
+  color: var(--btn-icon-border);
   font-size: clamp(1rem, 2rem, 3rem);
 }
 
@@ -117,6 +129,11 @@ h3 {
   line-height: 1.6;
   background-color: var(--highlight);
   z-index: -1;
+}
+
+.icon {
+  height: 100px;
+  width: 100px;
 }
 
 .center {
@@ -191,4 +208,60 @@ form {
 }
 .radio-group label {
   padding: 0.05rem 0.5rem;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 200px auto;
+  background: white;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+#app form {
+  width: 400px;
+}
+
+#app h3 {
+  text-align: center;
+}
+
+#app .icon {
+  place-self: center;
+  padding: 1.5rem;
+  border-radius: 50%;
+  border: 5px solid white;
+  background-color: lightsalmon;
+}
+@media screen and (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+
+  main {
+    padding: 0.5rem;
+  }
+
+  header {
+    padding: 0.5rem 1rem;
+    margin: 0;
+  }
+
+  header img {
+    height: 45px;
+    width: 45px;
+  }
+
+  header h1 {
+     font-size: 1.5rem;
+  }
+
+  #app {
+    display: block;
+  }
+
+  #app form {
+    width: unset;
+  }
 }

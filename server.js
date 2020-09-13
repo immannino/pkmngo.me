@@ -37,9 +37,9 @@ app.get('/:name/:code', async (req, res) => {
     res.set({
       'content-type': 'image/svg+xml',
       'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
-    });
+    }); 
 
-    return fs.createReadStream(`${__dirname}/404.svg`).pipe(res);
+    return fs.createReadStream(`${__dirname}/404.png`).pipe(res);
   }
 
   

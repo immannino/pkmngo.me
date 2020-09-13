@@ -9,36 +9,40 @@
     <meta name="title" content="Trainer Card Buddy">
     <meta property="og:site_name" content="pogo-card">
     <meta property="og:locale" content="en_US">
-    <meta property="og:url" content="https://pogo-card.spaghet.me">
-    <meta name="twitter:site" content="https://pogo-card.spaghet.me">
-    <meta data-hid="title" name="title" content="Trainer Card Buddy">
+    <meta property="og:url" content="https://pkmngo.me">
+    <meta name="twitter:site" content="https://pkmngo.me">
+    <meta data-hid="title" name="title" content="Trainer Card Creator">
     <meta data-hid="description" name="description" content="Create and Share your Pokemon Go trainer card online!">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Trainer Card Buddy">
     <meta property="og:description" content="Create and Share your Pokemon Go trainer card online!">
-    <meta property="og:image" content="https://pogo-card.spaghet.me/404.png">
+    <meta property="og:image" content="https://pkmngo.me/404.png">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Trainer Card Buddy">
+    <meta name="twitter:title" content="Trainer Card Creator">
     <meta name="twitter:description" content="Create and Share your Pokemon Go trainer card online!">
-    <meta name="twitter:image" content="https://pogo-card.spaghet.me/404.png">
+    <meta name="twitter:image" content="https://pkmngo.me/404.png">
     <meta name="twitter:image:alt" content="Pokemon Hatch Egg image">
-    <title>Trainer Card Builder</title>
+    <title>Trainer Card Creator</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
   </head>
   <body>
     <header>
+      <div class="img-wrap">
+        <img src="/egg.svg" alt="Egg">
+      </div>
       <h1>
-        Trainer Card Buddy
+        Trainer Card Creator
       </h1>
     </header>
 
     <main>
-      <p>Create and Share your Pokemon Go trainer card online!</p>
+      <p>Create and Share your Pokemon Go trainer card online! <a href="/demo">Check out the demo.</a></p>
       
       <h4>Features</h4>
 
@@ -52,6 +56,12 @@
       
 
     <div id="app" @submit.prevent="createImage">
+      <div>
+        <h3>Card Creator</h3>
+        <div class="icon center">
+          <img src="/icons/smartphone.svg" alt="">
+        </div>
+      </div>
       <form name="form" onsubmit="javascript:void(0);">
         <label for="name">Trainer Name</label>
         <input v-model="name" id="name" required name="name" aria-label="Pokemon go Trainer name" type="text" maxlength="100" placeholder="GoodBarn">
@@ -61,28 +71,40 @@
         <div class="error" v-if="notification">{{notification}}</div>
 
         <label for="radio-group">Select Card Style</label>
-        <div class="radio-group">
-          <input type="radio" name="style" value="default" id="default" checked v-model="style">
-          <label for="default">Default</label>
-
-          <input type="radio" name="style" value="mystic" id="mystic" v-model="style">
-          <label class="mystic" for="mystic">Mystic</label>
-
-          <input type="radio" name="style" value="instinct" id="instinct" v-model="style">
-          <label class="instinct" for="instinct">Instinct</label>
-
-          <input type="radio" name="style" value="valor" id="valor" v-model="style">
-          <label class="valor" for="valor">Valor</label>
-        </div>
+        <select name="style" id="styles" v-model="style">
+          <option value="default" selected>default</option>
+          <option value="mystic">Mystic</option>
+          <option value="instinct">Instinct</option>
+          <option value="valor">Valor</option>
+          <option value="eevee">Eevee</option>
+          <option value="pikachu">Pikachu</option>
+          <option value="pokeball">Poke Ball</option>
+          <option value="greatball">Great Ball</option>
+          <option value="ultraball">Ultra Ball</option>
+          <option value="masterball">Master Ball</option>
+          <option value="love">Love</option>
+          <option value="map">Map</option>
+          <option value="rocketLight">Team Rocket - Light</option>
+          <option value="rocketDark">Team Rocket - Dark</option>
+        </select>
 
         <button id="submit" class="pogo-button center">Create!</button>
       </form>
     </div>
+
+    <hr>
+    <section class="how-it-works">
+      <p style="font-size: 14px;">This project uses SVG templates to quickly create trainer cards on the fly. There is a default endpoint at <code>/:trainerName/:trainerCode/</code> that returns the image as an <strong>SVG</strong>, and then an additional endpoint at <code>/:trainerName/:trainerCode/card.png</code> that returns a <strong>PNG</strong> file. I've found that the PNG file is more ~ social friendly ~ when pasting the URL online to share.</p>
+    </section>
     </main>
 
     <footer>
       <hr>
-      Made with love by <a href="https://spaghet.me" target="_blank">Tony</a> on <a href="https://glitch.com" target="_blank">Glitch</a>!
+      <p>Made with love by <a href="https://spaghet.me" target="_blank">Tony</a> on <a href="https://glitch.com" target="_blank">Glitch</a>!</p>
+      <p class="disc">pkmngo.me and any of it's websites are not affiliated with <a href="https://pokemongolive.com/en/" target="_blank">Pokémon Go</a> or <a href="https://nianticlabs.com/en/" target="_blank">Niantic, Inc.</a>. Pokémon and Pokémon character names are trademarks of Nintendo.</p>
+      <p class="disc">This site is a community run and open source utility to help Pokemon Go players share their trainer information with one another.</p>
+      <p class="disc">pkmngo.me does not collect any data, store cookies, or use any tracking of any kind. This is simply a site that creates dynamic images to share online.</p>
+      <p class="disc">Icons made by <a href="https://www.flaticon.com/authors/roundicons-freebies" title="Roundicons Freebies">Roundicons Freebies</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
     </footer>
 
     <script>
@@ -109,13 +131,11 @@
 
                 const formattedCode = this.code.split(' ').join('-');
 
-                const styleText = this.style === 'mystic' ? 'mystic' :
-                            this.style === 'instinct' ? 'instinct' :
-                            this.style === 'valor' ? 'valor' : '';
-
+                const styleText = this.style === 'default' ? '' : this.style;
+                
                 const style = styleText.length ? `?style=${styleText}` : '';
                 
-                window.open(`/${this.name}/${formattedCode}${style}`, '_blank');
+                window.open(`/${this.name}/${formattedCode}/card.png${style}`, '_blank');
               }
             }
       })
@@ -126,6 +146,7 @@
       .mystic { color: blue; }
       .valor { color: red; }
       .instinct { color: yellow; background: black; }
+      .disc { font-size: 12px; }
     </style>
   </body>
 </html>

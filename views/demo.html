@@ -1,31 +1,84 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
-<head>   
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Trainer Card Buddy">
+    <meta name="title" content="Demo | Trainer Card Buddy">
     <meta property="og:site_name" content="pogo-card">
     <meta property="og:locale" content="en_US">
-    <meta property="og:url" content="https://pogo-card.spaghet.me">
-    <meta name="twitter:site" content="https://pogo-card.spaghet.me">
-    <meta data-hid="title" name="title" content="Trainer Card Buddy">
+    <meta property="og:url" content="https://pkmngo.me">
+    <meta name="twitter:site" content="https://pkmngo.me">
+    <meta data-hid="title" name="title" content="Demo | Trainer Card Creator">
     <meta data-hid="description" name="description" content="Create and Share your Pokemon Go trainer card online!">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Trainer Card Buddy">
+    <meta property="og:title" content="Demo | Trainer Card Buddy">
     <meta property="og:description" content="Create and Share your Pokemon Go trainer card online!">
-    <meta property="og:image" content="https://pogo-card.spaghet.me/404.png">
+    <meta property="og:image" content="https://pkmngo.me/404.png">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Trainer Card Buddy">
+    <meta name="twitter:title" content="Demo | Trainer Card Creator">
     <meta name="twitter:description" content="Create and Share your Pokemon Go trainer card online!">
-    <meta name="twitter:image" content="https://pogo-card.spaghet.me/404.png">
+    <meta name="twitter:image" content="https://pkmngo.me/404.png">
     <meta name="twitter:image:alt" content="Pokemon Hatch Egg image">
-    <title>Demo | Trainer Card Builder</title>
-</head>
-<body>
-    <img src="/GoodBarn/0414-5988-7356/" alt="Base Card">
-    <img src="/GoodBarn/0414-5988-7356/?style=valor" alt="Valor Card">
-    <img src="/GoodBarn/0414-5988-7356/?style=instinct" alt="Instinct Card">
-    <img src="/GoodBarn/0414-5988-7356/?style=mystic" alt="Mystic Card">
+    <title>Demo | Trainer Card Creator</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="img-wrap">
+        <img src="/egg.svg" alt="Egg">
+      </div>
+      <h1>
+        Demo | Trainer Card Creator
+      </h1>
+    </header>
+    <main>
+        <p>Trainer card buddy transforms your Pokemon Go trainer info and lets you share an image online that allows people to quickly scan your QR code and add you to their friends list.</p>
+        <p></p>
+        <p><a class="pogo-button center" href="/">Create your own!</a></p>
+    </main>
+    <div class="cards">
+      <img src="/Default/0414-5988-7356/" alt="Base Card">
+      <img src="/Valor/0414-5988-7356/?style=valor" alt="Valor Card">
+      <img src="/Instinct/0414-5988-7356/?style=instinct" alt="Instinct Card">
+      <img src="/Mystic/0414-5988-7356/?style=mystic" alt="Mystic Card">
+      <img src="/Mystic/0414-5988-7356/?style=eevee" alt="Eevee card">
+      <img src="/Mystic/0414-5988-7356/?style=pikachu" alt="Pikachu card">
+      <img src="/Mystic/0414-5988-7356/?style=pokeball" alt="pokeball card">
+      <img src="/Mystic/0414-5988-7356/?style=greatball" alt="greatball card">
+      <img src="/Mystic/0414-5988-7356/?style=ultraball" alt="ultraball card">
+      <img src="/Mystic/0414-5988-7356/?style=masterball" alt="masterball card">
+      <img src="/Mystic/0414-5988-7356/?style=love" alt="love card">
+      <img src="/Mystic/0414-5988-7356/?style=map" alt="map card">
+      <img src="/Mystic/0414-5988-7356/?style=rocketLight" alt="rocketLight card">
+      <img src="/Mystic/0414-5988-7356/?style=rocketDark" alt="rocketDark card">
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        header.onclick = () => window.location.replace('/');
+    </script>
+
+    <style>
+        header:hover {
+            cursor: pointer;
+        }
+
+        .cards {
+          text-align: center;
+        }
+
+        .cards > * {
+          margin: 0.5rem;
+        }
+    </style>
 </body>
 </html>
