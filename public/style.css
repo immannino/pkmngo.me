@@ -131,6 +131,8 @@ h3 {
   z-index: -1;
 }
 
+.disc { font-size: 12px; }
+
 .icon {
   height: 100px;
   width: 100px;
@@ -263,5 +265,9 @@ form {
 
   #app form {
     width: unset;
+  }
+
+  footer {
+    padding: 0.5rem;
   }
 }
