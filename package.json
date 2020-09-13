@@ -7,6 +7,7 @@
   "description": "A simple API to create & share your own Pokemon Go trainer cards using SVG.",
   "main": "server.js",
   "scripts": {
+    "prestart": "npm install --unsafe-perm --ignore-scripts=false sharp",
     "start": "node server.js",
     "watch": "nodemon server.js"
   },
