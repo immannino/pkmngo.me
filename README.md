@@ -1,3 +1,5 @@
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fimmannino%2Fpkmngo.me)
+
 # Trainer Card Buddy
 
 > Create and Share your Pokemon Go trainer card online!
@@ -18,7 +20,6 @@ All the card templates are SVGs I have created in Figma, and then I copy the SVG
 | -------- | ----------- |
 | `/:name/:code?style={}` | Returns a SVG template for your Pokemon Go Trainer card |
 | `/:name/:code/card.png?style={}` | Returns a PNG template for your Pokemon Go Trainer card. This endpoint shares better for online social platforms, allowing others to see the image when you share it. |
-
 
 
 ### To Do:
