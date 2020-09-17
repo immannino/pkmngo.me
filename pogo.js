@@ -3,7 +3,7 @@ const sharp = require('sharp');
 const template = require('./templates');
 
 async function createPogoImage(res, name, code, style) {
-    const qrCode = await QRCode.toDataURL(code);
+    const qrCode = await QRCode.toDataURL(code.split('-').join(''));
     const formattedCode = code.split('-').join(' ');
     let image;
   
@@ -23,7 +23,7 @@ async function createPogoImage(res, name, code, style) {
 }
 
 async function createPogoImagePng(res, name, code, style) {
-    const qrCode = await QRCode.toDataURL(code);
+    const qrCode = await QRCode.toDataURL(code.split('-').join(''));
     const formattedCode = code.split('-').join(' ');
     
     let image;
