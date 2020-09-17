@@ -4,7 +4,7 @@
 
 > Create and Share your Pokemon Go trainer card online!
 
-[Checkout the demo](https://pkmngo-me.glitch.me/demo)
+[Checkout the demo](https://pkmngo.me/demo)
 
 I wanted to create a cool way to share my Pokemon Go trainer card online, and this is what I have come up with. Using the form on the site, you can enter your Pokemon Go information, and the API will automatically generate an SVG or PNG image to share online.
 
@@ -30,13 +30,13 @@ All the card templates are SVGs I have created in Figma, and then I copy the SVG
 
 
 ### Examples
-![Valor](https://pkmngo-me.glitch.me/Valor/0414-5988-7356/?style=valor)
-![Instinct](https://pkmngo-me.glitch.me/Instinct/0414-5988-7356/?style=instinct)
-![Mystic](https://pkmngo-me.glitch.me/Mystic/0414-5988-7356/?style=mystic)
-![Eevee](https://pkmngo-me.glitch.me/Eevee/0414-5988-7356/?style=eevee)
-![Pikachu](https://pkmngo-me.glitch.me/Pikachu/0414-5988-7356/?style=pikachu)
-![Love](https://pkmngo-me.glitch.me/Love/0414-5988-7356/?style=love)
-![Map](https://pkmngo-me.glitch.me/Map/0414-5988-7356/?style=map)
-![Team Rocket](https://pkmngo-me.glitch.me/Team%20Rocket%20Dark/0414-5988-7356/?style=rocketDark)
+![Valor](https://pkmngo.me/Valor/0414-5988-7356/card.svg?style=valor)
+![Instinct](https://pkmngo.me/Instinct/0414-5988-7356/card.svg?style=instinct)
+![Mystic](https://pkmngo.me/Mystic/0414-5988-7356/card.svg?style=mystic)
+![Eevee](https://pkmngo.me/Eevee/0414-5988-7356/card.svg?style=eevee)
+![Pikachu](https://pkmngo.me/Pikachu/0414-5988-7356/card.svg?style=pikachu)
+![Love](https://pkmngo.me/Love/0414-5988-7356/card.svg?style=love)
+![Map](https://pkmngo.me/Map/0414-5988-7356/card.svg?style=map)
+![Team Rocket](https://pkmngo.me/Team%20Rocket%20Dark/0414-5988-7356/card.svg?style=rocketDark)
 
 
