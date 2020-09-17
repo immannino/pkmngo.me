@@ -38,7 +38,7 @@ app.get('/:name/:code', async (req, res) => {
   const description = `Add ${name} on Pokemon Go! My trainer code is ${code}.`;
   const query = req.query['style'] ? `?style=${req.query['style']}` : '';
   
-  const url = `https://pkmngo.me/${name}/${code}${query}`;
+  const url = `https://www.pkmngo.me/${name}/${code}${query}`;
 
   return res.render('trainer', { layout: false, title: title, description: description, url: url });
 });
