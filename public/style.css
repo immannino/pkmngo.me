@@ -116,7 +116,6 @@ h1,
 h2,
 h3 {
   color: var(--color);
-  /* border-bottom: 1px solid var(--highlight); */
 }
 
 .highlight {
@@ -236,6 +235,11 @@ form {
   border: 5px solid white;
   background-color: lightsalmon;
 }
+
+footer {
+  padding: 0.5rem;
+}
+
 @media screen and (max-width: 600px) {
   body {
     padding: 0;
@@ -265,9 +269,5 @@ form {
 
   #app form {
     width: unset;
-  }
-
-  footer {
-    padding: 0.5rem;
   }
 }

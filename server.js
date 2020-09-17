@@ -3,6 +3,7 @@
 
 // init project
 const express = require("express");
+const expressHbs = require('express-handlebars');
 const bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
@@ -10,7 +11,9 @@ const { createPogoImage, createPogoImagePng } = require('./pogo');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.engine('handlebars', expressHbs());
 
+app.set('view engine', 'handlebars');
 // we've started you off with Express,
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
@@ -30,6 +33,18 @@ app.get('/demo', (req, res) => {
 
 app.get('/:name/:code', async (req, res) => {
   const { name, code } = req.params;
+
+  const title = `${name} | Trainer Card Buddy`;
+  const description = `Add ${name} on Pokemon Go! My trainer code is ${code}.`;
+  const query = req.query['style'] ? `?style=${req.query['style']}` : '';
+  
+  const url = `https://pkmngo.me/${name}/${code}${query}`;
+
+  return res.render('trainer', { layout: false, title: title, description: description, url: url });
+});
+
+app.get('/:name/:code/card.svg', async (req, res) => {
+  const { name, code } = req.params;
   
   const style = req.query['style'];
 
@@ -42,7 +57,6 @@ app.get('/:name/:code', async (req, res) => {
     return fs.createReadStream(`${__dirname}/404.png`).pipe(res);
   }
 
-  
   return await createPogoImage(res, name, code, style);
 });
 

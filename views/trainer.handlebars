@@ -1,0 +1,200 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="{{ title }}">
+    <meta property="og:site_name" content="pogo-card">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="{{ url }}">
+    <meta name="twitter:site" content="{{ url }}">
+    <meta data-hid="title" name="title" content="{{ title }}">
+    <meta data-hid="description" name="description" content="{{ description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:image" content="https://pkmngo.me/trainer.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="https://pkmngo.me/trainer.png">
+    <meta name="twitter:image:alt" content="Pokemon Hatch Egg image">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+  </head>
+  <body>
+
+    <header>
+        <div class="img-wrap">
+            <img src="/egg.svg" alt="Egg">
+        </div>
+        <h1 id="name"></h1>
+    </header>
+    <div id="app">
+        <div class="action" v-if="actionText">{{actionText}}</div>
+        <div class="image">
+          <h4>Your Trainer Card</h4>
+          <a :href="pngImageUrl" target="_blank">
+            <img class="card-image" :src="svgImageUrl" alt="Pokemon Go Card" v-if="svgImageUrl">
+          </a>
+          <button class="pogo-button" @click="copyPng()">Copy Image URL <img class="copy" src="/copy-regular.svg" alt="Copy Text Icon"></button>
+          <a class="open-image" :href="pngImageUrl" target="_blank">Open card in a new tab</a>
+        </div>
+        <div class="share">
+            <details>
+                <summary>Sharing Options</summary>
+                <div class="content">
+                  <button class="pogo-button" @click="copySvg()">Copy SVG <img class="copy" src="/copy-regular.svg" alt="Copy Text Icon"> </button>
+                  <button class="pogo-button" @click="copyPng()">Copy PNG <img class="copy" src="/copy-regular.svg" alt="Copy Text Icon"> </button>
+                  <div class="embed-code">
+                    <button class="pogo-button" @click="copyEmbed()">< /> Copy Embed Code <img class="copy" src="/copy-regular.svg" alt="Copy Text Icon"> </button>
+                    <textarea name="embedCode" id="textArea" cols="30" rows="7" :value="embedCode" v-if="embedCode"></textarea>
+                  </div>
+                </div>
+            </details>
+            <a :href="retryCreateUrl">Try a different style?</a>
+        </div>
+    </div>
+
+    <footer>
+      <hr>
+      <p>Made with love by <a href="https://spaghet.me" target="_blank">Tony</a> on <a href="https://glitch.com" target="_blank">Glitch</a>!</p>
+      <p class="disc">pkmngo.me and any of it's websites are not affiliated with <a href="https://pokemongolive.com/en/" target="_blank">Pokémon Go</a> or <a href="https://nianticlabs.com/en/" target="_blank">Niantic, Inc.</a>. Pokémon and Pokémon character names are trademarks of Nintendo.</p>
+      <p class="disc">This site is a community run and open source utility to help Pokemon Go players share their trainer information with one another.</p>
+      <p class="disc">pkmngo.me does not collect any data, store cookies, or use any tracking of any kind. This is simply a site that creates dynamic images to share online.</p>
+      <p class="disc">Icons made by <a href="https://www.flaticon.com/authors/roundicons-freebies" title="Roundicons Freebies">Roundicons Freebies</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+    </footer>
+
+    <script>
+      new Vue({
+            el: '#app',
+            data: {
+                name: null,
+                code: null,
+                svgImageUrl: null,
+                pngImageUrl: null,
+                embedCode: null,
+                retryCreateUrl: null,
+                actionText: null
+            },
+            mounted() {
+                const [_, name, code] = window.location.pathname.split('/');
+                this.name = name;
+                this.code = code.split('-').join(' ');
+                this.svgImageUrl = `${window.location.origin}${window.location.pathname}/card.svg${window.location.search}`;
+                this.pngImageUrl = `${window.location.origin}${window.location.pathname}/card.png${window.location.search}`;
+                this.embedCode = `<a href="${window.location.href}" target="_blank"><img src="${this.svgImageUrl}" alt="Pokemon Go Card"></a>`;
+                this.retryCreateUrl = `${window.location.origin}/?name=${name}&code=${code}`;
+                document.querySelector('#name').textContent = `Trainer ${this.name}`;
+                document.querySelector('header').addEventListener('click', () => window.location.replace('/'));
+            },
+            methods: {
+              clickToCopy(value) {
+                  const textArea = document.createElement("textarea");
+                  textArea.textContent = value;
+                  textArea.style.position = "fixed";
+
+                  document.body.appendChild(textArea);
+                  textArea.focus();
+                  textArea.select();
+                  textArea.setSelectionRange(0, 99999); /*For mobile devices*/
+
+                  /* Copy the text inside the text field */
+                  try {
+                      document.execCommand("copy");
+                      this.actionText = "Copied!";
+                  } catch (err) {
+                      console.log(err);
+                      this.actionText = "Copy Failed!";
+                  } finally {
+                      document.body.removeChild(textArea);
+                  }
+              },
+              copySvg() {
+                this.clickToCopy(this.svgImageUrl);
+              },
+              copyPng() {
+                this.clickToCopy(this.pngImageUrl);
+              },
+              copyEmbed() {
+                this.clickToCopy(this.embedCode);
+              }
+            }
+      })
+    </script>
+    <style>
+      body {
+        /* background: white; */
+      }
+
+      header:hover {
+          cursor: pointer;
+      }
+
+      #app {
+        display: block;
+        text-align: center;
+        background-color: transparent;
+      }
+
+      h4 {
+        margin-bottom: 1rem;
+      }
+
+      .open-image {
+        display: block;
+        font-size: 12px;
+        padding-top: 0.5rem;
+      }
+
+      .image {
+        margin: 0 auto;
+        background: white;
+        padding: 1rem 3rem;
+      }
+
+      .image .pogo-button {
+        margin: 0 auto;
+        display: block;
+      }
+
+      .image .card-image {
+        border-radius: 5px;
+        box-shadow: 0 0 10px #d6d6d6;
+      }
+
+      .share {
+        background: white;
+        border-radius: 5px;
+        padding: 1rem;
+      }
+
+      .copy { height: 15px; width: 15px; color: white; background-color: transparent; vertical-align: revert; margin: 0; }
+      .content .pogo-button { max-width: 300px; display: block; margin: 0.5rem auto; width: 100%; font-weight: bold; }
+      @media screen and (max-width: 600px) {
+        #app  { 
+          display: block;
+        }
+
+        .pogo-button {
+          font-size: 14px;
+        }
+
+        .copy {
+          height: 12px;
+          width: 12px;
+        }
+      }
+      .error { font-size: 12px; color: red;}
+    </style>
+  </body>
+</html>

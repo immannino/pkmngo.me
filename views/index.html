@@ -22,7 +22,7 @@
     <meta name="twitter:description" content="Create and Share your Pokemon Go trainer card online!">
     <meta name="twitter:image" content="https://pkmngo.me/404.png">
     <meta name="twitter:image:alt" content="Pokemon Hatch Egg image">
-    <title>Trainer Card Creator</title>
+    <title>Trainer Card Buddy</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
     <link rel="stylesheet" href="/style.css">
@@ -37,7 +37,7 @@
         <img src="/egg.svg" alt="Egg">
       </div>
       <h1>
-        Trainer Card Creator
+        Trainer Card Buddy
       </h1>
     </header>
 
@@ -48,9 +48,9 @@
 
       <blockquote>
         <ul>
-          <li>Customize to match your team</li>
+          <li>Customize to match your team or style</li>
           <li>Share it with your friends</li>
-          <li>Post on Social Media</li>
+          <li>Post on Social Media for easy QR scanning</li>
         </ul> 
       </blockquote>
       
@@ -119,7 +119,12 @@
                 style: 'default'
             },
             mounted() {
+              if (window.location.search.length) {
+                const params = new URLSearchParams(window.location.search);
 
+                this.name = params.get('name');
+                this.code = params.get('code').split('-').join('');
+              }
             },
             methods: {
               createImage() {
@@ -135,7 +140,7 @@
                 
                 const style = styleText.length ? `?style=${styleText}` : '';
                 
-                window.open(`/${this.name}/${formattedCode}/card.png${style}`, '_blank');
+                window.open(`/${this.name}/${formattedCode}${style}`);
               }
             }
       })

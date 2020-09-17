@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
     "qrcode": "^1.4.4",
     "sharp": "^0.26.0",
     "sqlite3": "^4.1.1"
