@@ -47,6 +47,7 @@
             <img class="card-image" :src="svgImageUrl" alt="Pokemon Go Card" v-if="svgImageUrl">
           </a>
           <button class="pogo-button" @click="copyPng()">Copy Image URL <img class="copy" src="/copy-regular.svg" alt="Copy Text Icon"></button>
+          <button class="pogo-button" @click="copyCode()">Copy Trainer Code <img class="copy" src="/copy-regular.svg" alt="Copy Text Icon"></button>
           <a class="open-image" :href="pngImageUrl" target="_blank">Open card in a new tab</a>
         </div>
         <div class="share">
@@ -127,6 +128,9 @@
               },
               copyEmbed() {
                 this.clickToCopy(this.embedCode);
+              },
+              copyCode() {
+                this.clickToCopy(this.code.split(' ').join(''));
               }
             }
       })
@@ -153,7 +157,6 @@
       .open-image {
         display: block;
         font-size: 12px;
-        padding-top: 0.5rem;
       }
 
       .image {
@@ -163,7 +166,7 @@
       }
 
       .image .pogo-button {
-        margin: 0 auto;
+        margin: 0.5rem auto;
         display: block;
       }
 
@@ -179,7 +182,7 @@
       }
 
       .copy { height: 15px; width: 15px; color: white; background-color: transparent; vertical-align: revert; margin: 0; }
-      .content .pogo-button { max-width: 300px; display: block; margin: 0.5rem auto; width: 100%; font-weight: bold; }
+      .pogo-button { max-width: 300px; display: block; margin: 0.5rem auto; width: 100%; font-weight: bold; }
       @media screen and (max-width: 600px) {
         #app  { 
           display: block;
